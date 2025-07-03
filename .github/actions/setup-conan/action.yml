@@ -1,0 +1,31 @@
+name: "Setup Conan"
+description: "Install and configure the conan client"
+runs:
+  using: "composite"
+  steps:
+    - run: python3 -m pip install "conan>=2.0" --upgrade --ignore-installed
+      shell: bash
+
+    # - run: python3 -m pip install "conan_package_tools==0.39.0" --upgrade --ignore-installed
+    #   shell: bash
+
+    # - run: conan config init --force
+    #   shell: bash
+
+    - run: python3 --version
+      shell: bash
+
+    - run: conan --version
+      shell: bash
+
+    - run: conan profile detect
+      shell: bash
+
+    - run: conan config install -t dir ./.conan
+      shell: bash
+
+    - run: conan remote update conancenter --url="https://center2.conan.io"
+      shell: bash
+
+    # - run: conan remote add kth https://packages.kth.cash/api
+    #   shell: bash
